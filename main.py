@@ -17,6 +17,8 @@ st.set_page_config(
     menu_items={}
 )
 
+# #A27C24
+
 #MARKDOWN STYLE
 st.markdown("""
 <style>
@@ -204,7 +206,7 @@ with main_tab_4:
     popever, empty, sample_data, description = st.columns([2,1,1,2])
     with popever:
         with st.popover("opis funkcjonalności"):
-            st.markdown('<div style="text-align: justify; color: #EDE8DC">Zakładka służy do automatycznej konwersji plików .csv oraz wizualizacji zawartych w nich danych. '
+            st.markdown('<div style="text-align: justify; color: #982B1C">Zakładka służy do automatycznej konwersji plików .csv oraz wizualizacji zawartych w nich danych. '
                         'Masz do dyspozycji sformatowane dane, ich wizualizację w postaci wykresów i tabel, z którymi możesz wchodzić w interakcję albo - w razie potrzeby - zapisywać do pliku.\n'
                         'W celu przeprowadzenia konwersji użyj zakładki "konwersja spoza schematów" bądź użyj gotowych schematów dla określonych dostawców. '
                         'Jeśli w schematach nie odnajdziesz odpowiedniego szablonu, prześlij formularz zgłoszeniowy wraz z przykładowym plikiem, do którego przygotujemy szablon. '
@@ -212,7 +214,7 @@ with main_tab_4:
     with sample_data:
         sample_data_on = st.toggle("Załaduj przykładowe dane")
     with description:
-        st.markdown('<div style="text-align: justify; color: #E9EFEC">'
+        st.markdown('<div style="text-align: justify; color: #982B1C">'
                     'Jeżeli chcesz sprawdzić działanie aplikacji bez konieczności posiadania pliku z danymi, '
                     'skorzystaj z opcji "Załaduj przykładowe dane" znajdującej się po lewej stronie</div>',
             unsafe_allow_html=True)
