@@ -147,11 +147,11 @@ with name:
 #     st.image('.static/1.png', width=400)
 
 #SIDEBAR
-with st.sidebar:
-    with st.container(height=550):
-        # OPIS STRONY
-        st.markdown('<div style="text-align: justify;">Aplikacja ułatwia zarządzanie podstawowymi sferami transportu drogowego i jest na bieżąco rozbudowywana o kolejne funkcjonalności.</div>', unsafe_allow_html=True)
-        st.divider()
+# with st.sidebar:
+#     with st.container(height=550):
+#         # OPIS STRONY
+#         st.markdown('<div style="text-align: justify;">Aplikacja ułatwia zarządzanie podstawowymi sferami transportu drogowego i jest na bieżąco rozbudowywana o kolejne funkcjonalności.</div>', unsafe_allow_html=True)
+#         st.divider()
         # st.markdown("Przyszłe moduły aplikacji i przepływ informacji")
         #
         # graph = graphviz.Graph()
@@ -164,29 +164,29 @@ with st.sidebar:
         # graph.edge("ZARZĄDZANIE TRANSPORTEM", "ANALIZA  ZUŻYCIA PALIWA")
         # st.graphviz_chart(graph)
 
-    with st.container(height=350):
-        st.markdown('<div style="text-align: justify;">Jeśli masz uwagi odnośnie poprawności funkcjonowania aplikacji bądź propozycje rozszerzenia funkcjonalności, napisz do nas.\n</div>', unsafe_allow_html=True)
-        st.divider()
-        prompt = st.text_input(label ='Treść zgłoszenia', placeholder='Wpisz treść zgłoszenia')
-        empty, epmty, button = st.columns(3)
-        with button:
-            add_user_text = st.button('Wyślij')
-        if add_user_text:
-            with open('users_messages.csv', 'a') as file:
-                file.write(f"Data zgłoszenia: {dt.datetime.today()}, treść zgłoszenia:")
-                for line in prompt:
-                    file.write(line)
-                file.write('\n\n')
-        st.write('Treść zgłoszenia nie podlega publikacji.')
+    # with st.container(height=350):
+    #     st.markdown('<div style="text-align: justify;">Jeśli masz uwagi odnośnie poprawności funkcjonowania aplikacji bądź propozycje rozszerzenia funkcjonalności, napisz do nas.\n</div>', unsafe_allow_html=True)
+    #     st.divider()
+    #     prompt = st.text_input(label ='Treść zgłoszenia', placeholder='Wpisz treść zgłoszenia')
+    #     empty, epmty, button = st.columns(3)
+    #     with button:
+    #         add_user_text = st.button('Wyślij')
+    #     if add_user_text:
+    #         with open('users_messages.csv', 'a') as file:
+    #             file.write(f"Data zgłoszenia: {dt.datetime.today()}, treść zgłoszenia:")
+    #             for line in prompt:
+    #                 file.write(line)
+    #             file.write('\n\n')
+    #     st.write('Treść zgłoszenia nie podlega publikacji.')
 
-    st.divider()
-
-    on = st.toggle("Kalendarz")
-    if on:
-        current_day = st.date_input("", dt.datetime.today())
-        first_day_in_year = dt.date(dt.datetime.today().year, 1, 1)
-        days_counter = (current_day - first_day_in_year)
-        st.write("Dzisiaj jest {} dzień roku".format(str(days_counter).split(',')[0].split(' ')[0]))
+    # st.divider()
+    #
+    # on = st.toggle("Kalendarz")
+    # if on:
+    #     current_day = st.date_input("", dt.datetime.today())
+    #     first_day_in_year = dt.date(dt.datetime.today().year, 1, 1)
+    #     days_counter = (current_day - first_day_in_year)
+    #     st.write("Dzisiaj jest {} dzień roku".format(str(days_counter).split(',')[0].split(' ')[0]))
 
 
 #PODZIAŁ GŁÓWNEJ STRONY NA NAGŁÓWKI
