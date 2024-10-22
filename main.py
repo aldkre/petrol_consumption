@@ -4,7 +4,7 @@ import datetime as dt
 import time
 import re
 import numpy as np
-import graphviz
+#import graphviz
 import csv
 
 #if __name__ = "__main__":
@@ -152,17 +152,17 @@ with st.sidebar:
         # OPIS STRONY
         st.markdown('<div style="text-align: justify;">Aplikacja ułatwia zarządzanie podstawowymi sferami transportu drogowego i jest na bieżąco rozbudowywana o kolejne funkcjonalności.</div>', unsafe_allow_html=True)
         st.divider()
-        st.markdown("Przyszłe moduły aplikacji i przepływ informacji")
-
-        graph = graphviz.Graph()
-        graph.attr(fontcolor='white', bgcolor="#A27C24", size='12', shape='box')
-        graph.edge("BAZA TABORU", "EKSPLOATACJA TABORU")
-        st.graphviz_chart(graph)
-
-        graph = graphviz.Graph()
-        graph.attr(fontcolor='white', bgcolor="#A27C24", size='12', shape='box')
-        graph.edge("ZARZĄDZANIE TRANSPORTEM", "ANALIZA  ZUŻYCIA PALIWA")
-        st.graphviz_chart(graph)
+        # st.markdown("Przyszłe moduły aplikacji i przepływ informacji")
+        #
+        # graph = graphviz.Graph()
+        # graph.attr(fontcolor='white', bgcolor="#A27C24", size='12', shape='box')
+        # graph.edge("BAZA TABORU", "EKSPLOATACJA TABORU")
+        # st.graphviz_chart(graph)
+        #
+        # graph = graphviz.Graph()
+        # graph.attr(fontcolor='white', bgcolor="#A27C24", size='12', shape='box')
+        # graph.edge("ZARZĄDZANIE TRANSPORTEM", "ANALIZA  ZUŻYCIA PALIWA")
+        # st.graphviz_chart(graph)
 
     with st.container(height=350):
         st.markdown('<div style="text-align: justify;">Jeśli masz uwagi odnośnie poprawności funkcjonowania aplikacji bądź propozycje rozszerzenia funkcjonalności, napisz do nas.\n</div>', unsafe_allow_html=True)
