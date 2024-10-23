@@ -4,10 +4,7 @@ import datetime as dt
 import time
 import re
 import numpy as np
-#import graphviz
-import csv
 
-#if __name__ = "__main__":
 
 st.set_page_config(
     page_title="Konwerter pliku zużycia paliwa",
@@ -17,9 +14,7 @@ st.set_page_config(
     menu_items={}
 )
 
-# #A27C24
-
-#MARKDOWN STYLE
+#STYLE
 st.markdown("""
 <style>
 .title {
@@ -43,6 +38,7 @@ def value_separator(value):
     value = f'{value:,}'
     return value
 
+
 def numbers_as_string_checker(df, objects_list):
     text_series = [df[col] for col in objects_list]
     numbers_series = []
@@ -52,11 +48,13 @@ def numbers_as_string_checker(df, objects_list):
             numbers_series.append(ser.name)
     st.session_state["numbers_as_string"] = numbers_series
 
+
 def numbers_as_string_changer(df, num_as_str_list):
     for item in num_as_str_list:
         df[item] = df[item].str.replace(',','.')
         df[item] = pd.to_numeric(df[item], errors='coerce')
     st.session_state["converted_df"] = df
+
 
 def datetime_as_datetime_checker(df, objects_list):
     all_series = [df[col] for col in objects_list]
@@ -80,6 +78,7 @@ def datetime_as_datetime_checker(df, objects_list):
             datetime_series.append(ser.name)
             st.session_state["datetime_columns"] = datetime_series
 
+
 def datetime_changer(df):
     if 'date_columns' in st.session_state and 'time_columns' in st.session_state:
         df['Czas zdarzenia'] = df[[st.session_state.date_columns[0], st.session_state.time_columns[0]]].apply(" ".join, axis=1)
@@ -87,6 +86,7 @@ def datetime_changer(df):
         df['Czas zdarzenia'] = df[st.session_state['datetime_columns'][0]]
     df['Czas zdarzenia'] = pd.to_datetime(df['Czas zdarzenia'])
     st.session_state["converted_df_with_datetime"] = df
+
 
 def upload_checker(file):
     if file is not None or sample_data == True:
@@ -141,55 +141,25 @@ def prepare_df_to_analize(df):
 
     st.session_state['analize_data'] = df
 
+
 #NAGŁÓWEK STRONY
 logo, space, name = st.columns([2,1,4])
 with name:
     st.markdown('<p class="title">Transport drogowy</p>', unsafe_allow_html=True)
-# with logo:
-#     st.image('.static/1.png', width=400)
 
 #SIDEBAR
-# with st.sidebar:
-#     with st.container(height=550):
-#         # OPIS STRONY
-#         st.markdown('<div style="text-align: justify;">Aplikacja ułatwia zarządzanie podstawowymi sferami transportu drogowego i jest na bieżąco rozbudowywana o kolejne funkcjonalności.</div>', unsafe_allow_html=True)
-#         st.divider()
-        # st.markdown("Przyszłe moduły aplikacji i przepływ informacji")
-        #
-        # graph = graphviz.Graph()
-        # graph.attr(fontcolor='white', bgcolor="#A27C24", size='12', shape='box')
-        # graph.edge("BAZA TABORU", "EKSPLOATACJA TABORU")
-        # st.graphviz_chart(graph)
-        #
-        # graph = graphviz.Graph()
-        # graph.attr(fontcolor='white', bgcolor="#A27C24", size='12', shape='box')
-        # graph.edge("ZARZĄDZANIE TRANSPORTEM", "ANALIZA  ZUŻYCIA PALIWA")
-        # st.graphviz_chart(graph)
+with st.sidebar:
+    with st.container(height=550):
+        #OPIS STRONY
+        st.markdown('<div style="text-align: justify;">Aplikacja ułatwia zarządzanie podstawowymi sferami transportu drogowego i jest na bieżąco rozbudowywana o kolejne funkcjonalności.</div>', unsafe_allow_html=True)
+        st.divider()
 
-    # with st.container(height=350):
-    #     st.markdown('<div style="text-align: justify;">Jeśli masz uwagi odnośnie poprawności funkcjonowania aplikacji bądź propozycje rozszerzenia funkcjonalności, napisz do nas.\n</div>', unsafe_allow_html=True)
-    #     st.divider()
-    #     prompt = st.text_input(label ='Treść zgłoszenia', placeholder='Wpisz treść zgłoszenia')
-    #     empty, epmty, button = st.columns(3)
-    #     with button:
-    #         add_user_text = st.button('Wyślij')
-    #     if add_user_text:
-    #         with open('users_messages.csv', 'a') as file:
-    #             file.write(f"Data zgłoszenia: {dt.datetime.today()}, treść zgłoszenia:")
-    #             for line in prompt:
-    #                 file.write(line)
-    #             file.write('\n\n')
-    #     st.write('Treść zgłoszenia nie podlega publikacji.')
-
-    # st.divider()
-    #
-    # on = st.toggle("Kalendarz")
-    # if on:
-    #     current_day = st.date_input("", dt.datetime.today())
-    #     first_day_in_year = dt.date(dt.datetime.today().year, 1, 1)
-    #     days_counter = (current_day - first_day_in_year)
-    #     st.write("Dzisiaj jest {} dzień roku".format(str(days_counter).split(',')[0].split(' ')[0]))
-
+    on = st.toggle("Kalendarz")
+    if on:
+        current_day = st.date_input("", dt.datetime.today())
+        first_day_in_year = dt.date(dt.datetime.today().year, 1, 1)
+        days_counter = (current_day - first_day_in_year)
+        st.write("Dzisiaj jest {} dzień roku".format(str(days_counter).split(',')[0].split(' ')[0]))
 
 #PODZIAŁ GŁÓWNEJ STRONY NA NAGŁÓWKI
 main_tab_4, main_tab_1, main_tab_2, main_tab_3 = st.tabs(['Analiza zużycia paliwa', 'Baza taboru', 'Eksploatacja taboru', 'Zarządzanie transportem'])
@@ -206,7 +176,7 @@ with main_tab_4:
     popever, empty, sample_data, description = st.columns([2,1,1,2])
     with popever:
         with st.popover("opis funkcjonalności"):
-            st.markdown('<div style="text-align: justify; color: #982B1C">Zakładka służy do automatycznej konwersji plików .csv oraz wizualizacji zawartych w nich danych. '
+            st.markdown('<div style="text-align: justify; color: #FFF1DB">Zakładka służy do automatycznej konwersji plików .csv oraz wizualizacji zawartych w nich danych. '
                         'Masz do dyspozycji sformatowane dane, ich wizualizację w postaci wykresów i tabel, z którymi możesz wchodzić w interakcję albo - w razie potrzeby - zapisywać do pliku.\n'
                         'W celu przeprowadzenia konwersji użyj zakładki "konwersja spoza schematów" bądź użyj gotowych schematów dla określonych dostawców. '
                         'Jeśli w schematach nie odnajdziesz odpowiedniego szablonu, prześlij formularz zgłoszeniowy wraz z przykładowym plikiem, do którego przygotujemy szablon. '
@@ -214,15 +184,14 @@ with main_tab_4:
     with sample_data:
         sample_data_on = st.toggle("Załaduj przykładowe dane")
     with description:
-        st.markdown('<div style="text-align: justify; color: #982B1C">'
+        st.markdown('<div style="text-align: justify; color: #FFF1DB">'
                     'Jeżeli chcesz sprawdzić działanie aplikacji bez konieczności posiadania pliku z danymi, '
                     'skorzystaj z opcji "Załaduj przykładowe dane"</div>',
             unsafe_allow_html=True)
 
     st.divider()
 
-    # FUNKCJA ŁĄCZENIA WIELU PLIKÓW
-    # FUNKCJA ZAŁADUJ PRZYKŁADOWE DANE
+    # todo: FUNKCJA ŁĄCZENIA WIELU PLIKÓW
     if sample_data_on:
         file=None
         sample_data = True
@@ -300,7 +269,6 @@ with main_tab_4:
         else:
             st.warning('Nie wybrano żadnego pliku.', icon="⚠️")
 
-
     #ANALIZA DANYCH
     if "analize_data" in st.session_state and 'analize' in st.session_state and st.session_state.analize == True:
 
@@ -374,7 +342,7 @@ with main_tab_4:
         temp_data['Spalanie średnia +/-'] = temp_data['Spalanie średnia'] - temp_data.Spalanie
 
 
-        # FUNKCJA ŁĄCZENIA DANYCH Z BAZĄ TABORU!!!!!!!!!!!!!!!
+        # todo: FUNKCJA ŁĄCZENIA DANYCH Z BAZĄ TABORU
 
         true_value, stats, false_value = st.columns(3)
         with true_value:
@@ -389,8 +357,7 @@ with main_tab_4:
         with false_value:
             st.caption("Tabela z danymi spoza zakresu")
             st.write(out_of_range)
-                # FUNKCJA KOREKCJI BŁĘDÓW - DANYCH SPOZA ZAKRESU !!!!!!!!!!!!!!!!
-
+                # todo: FUNKCJA KOREKCJI BŁĘDÓW - DANYCH SPOZA ZAKRESU
 
             correction_file_out_name = st.text_input("Wprowadź nazwę pliku", value="Dane spoza zakresu")
             st.download_button(
@@ -455,8 +422,8 @@ with main_tab_4:
             if 'data_set_norms' in st.session_state:
                 temp_data = st.session_state.data_set_norms
 
-
             st.divider()
+
             st.subheader("Wizualizacja podstawowych danych z wybranego zakresu danych")
             st.caption("Nie uwzględnia danych wyłączonych z analizy")
 
@@ -583,8 +550,8 @@ with main_tab_4:
                     hide_index=True
                 )
 
-
                 st.divider()
+
                 if manual_true or "param_limits" in st.session_state:
                     st.subheader("Wizualizacja podstawowych danych wybranego zakresu i pojazdu")
                     selected_vehicle = st.selectbox(label="Wybierz pojazd do analizy parametrów", options=temp_data[st.session_state.vehicle_column].unique())
@@ -686,7 +653,3 @@ with main_tab_4:
                     },
                     hide_index=True
                 )
-
-            # buton pobierz dane
-
-    # ograniczenie do liczbowych jesli ktos wybierze tak i w pole zuzycia paliwa wybierze wartosc nieliczbowa
