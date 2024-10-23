@@ -216,7 +216,7 @@ with main_tab_4:
     with description:
         st.markdown('<div style="text-align: justify; color: #982B1C">'
                     'Jeżeli chcesz sprawdzić działanie aplikacji bez konieczności posiadania pliku z danymi, '
-                    'skorzystaj z opcji "Załaduj przykładowe dane" znajdującej się po lewej stronie</div>',
+                    'skorzystaj z opcji "Załaduj przykładowe dane"</div>',
             unsafe_allow_html=True)
 
     st.divider()
