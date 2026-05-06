@@ -62,11 +62,11 @@ with st.sidebar:
 # -------------------------------------------------
 # GŁÓWNA ZAKŁADKA
 # -------------------------------------------------
-(main_tab_4,) = st.tabs(["Analiza zużycia paliwa"])
+(fuel_consumption,) = st.tabs(["Analiza zużycia paliwa"])
 
-with main_tab_4:
-    popever, empty, sample_data_col, description = st.columns([2, 1, 1, 2])
-    with popever:
+with fuel_consumption:
+    popover, empty, sample_data_col, description = st.columns([2, 1, 1, 2])
+    with popover:
         with st.popover("opis funkcjonalności"):
             st.markdown(
                 '<div style="text-align: justify; color: #FFF1DB">'
@@ -109,8 +109,8 @@ with main_tab_4:
     # -------------------------------------------------
     # ZAKŁADKA KONWERSJI
     # -------------------------------------------------
-    (tab_1,) = st.tabs(["konwersja pliku"])
-    with tab_1:
+    (konwerter,) = st.tabs(["konwersja pliku"])
+    with konwerter:
         if not sample_data_on:
             source_data_provider = st.radio(
                 "Czy plik źródłowy zawiera pole obliczeniowe z wartością zużycia paliwa?",
@@ -675,11 +675,11 @@ with main_tab_4:
                         options=temp_data[st.session_state.vehicle_column].unique()
                     )
 
-                    # 🔥 filtr danych dla pojazdu
+                    # filtr danych dla pojazdu
                     df_v = temp_data[temp_data[st.session_state.vehicle_column] == selected_vehicle].set_index(
                         "Czas zdarzenia")
 
-                    # 🔥 konfiguracja sekcji
+                    # konfiguracja sekcji
                     sections = {
                         "Poziom zużycia paliwa": st.session_state.consumption_column,
                         "Liczba zatankowanego paliwa": st.session_state.fuel_column,
@@ -714,7 +714,7 @@ with main_tab_4:
                                 delta=value_separator(min_val - max_val)
                             )
 
-                    # 🔥 tabela końcowa
+                    # tabela końcowa
                     st.data_editor(
                         df_v.reset_index(),
                         column_order=[
