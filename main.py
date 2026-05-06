@@ -498,7 +498,7 @@ with fuel_consumption:
 
                 st.divider()
 
-                info, before_section, after_section = st.columns([2, 2, 6])
+                info, before_section, after_section = st.columns([3, 2, 6])
                 with info:
                     st.text("")
                     st.info(
